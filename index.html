@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>台灣即時失業率</title>
+  <style>
+    body { font-family: "微軟正黑體", sans-serif; padding: 2rem; }
+    #rate { font-size: 2rem; color: #e67e22; }
+  </style>
+</head>
+<body>
+  <h2>台灣最新失業率</h2>
+  <div id="rate">載入中...</div>
+
+  <script>
+    fetch("data.json")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("rate").textContent = `失業率：${data.unemployment_rate}%`;
+      })
+      .catch(() => {
+        document.getElementById("rate").textContent = "資料載入失敗";
+      });
+  </script>
+</body>
+</html>

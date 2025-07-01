@@ -32,40 +32,6 @@
       });
   </script>
 
-  <canvas id="chart" width="400" height="200"></canvas>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    const ctx = document.getElementById('chart').getContext('2d');
-    const chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['失業率', '經季節調整', '失業人數(千人)', '就業人數(千人)', '參與率'],
-        datasets: [{
-          label: '台灣最新勞動統計',
-          data: [],
-          backgroundColor: ['#e67e22', '#f39c12', '#c0392b', '#27ae60', '#2980b9'],
-        }]
-      },
-      options: {
-        animation: { duration: 2000 },
-        scales: {
-          y: { beginAtZero: true }
-        }
-      }
-    });
-
-    fetch("data.json")
-      .then(res => res.json())
-      .then(data => {
-        chart.data.datasets[0].data = [
-          parseFloat(data.unemployment_rate),
-          parseFloat(data.seasonal_adjusted),
-          parseFloat(data.unemployed_thousands),
-          parseFloat(data.employed_thousands),
-          parseFloat(data.participation_rate)
-        ];
-        chart.update();
-      });
-  </script>
+  
 </body>
 </html>

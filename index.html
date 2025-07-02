@@ -2,43 +2,36 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>台灣失業統計卡片模板</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>台灣失業人口資料儀表板</title>
   <style>
-    body {
-      font-family: "微軟正黑體", sans-serif;
-      background-color: #f9fafc;
-      padding: 2rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-    .card-container {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .card {
-      background-color: #e9f0ff;
-      border-radius: 12px;
-      padding: 1.5rem 2rem;
-      text-align: center;
-      width: 180px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    }
-    .card-title {
-      font-size: 1.1rem;
-      color: #24345f;
-      margin-bottom: 0.5rem;
-    }
-    .card-value {
-      font-size: 1.3rem;
-      color: #1a237e;
-      font-weight: bold;
-    }
+    body { font-family: 'Noto Sans TC', Arial, sans-serif; background: #f6f8fa; margin: 0; }
+    header, footer { background: #1a237e; color: #fff; padding: 16px 0; text-align: center; }
+    nav ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; }
+    nav li { margin: 0 18px; }
+    nav a { color: #fff; text-decoration: none; font-weight: bold; }
+    main { max-width: 900px; margin: 32px auto; background: #fff; padding: 32px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);}
+    .key-metrics { display: flex; justify-content: space-around; margin-bottom: 32px; }
+    .key-metrics div { background: #e3eafc; color: #1a237e; padding: 18px 24px; border-radius: 8px; font-size: 1.2em; min-width: 140px; text-align: center;}
+    section { margin-bottom: 38px; }
+    h2 { color: #1a237e; }
+    .chart-placeholder { background: #e3eafc; border: 2px dashed #90caf9; height: 300px; display: flex; align-items: center; justify-content: center; color: #90caf9; font-size: 1.1em;}
+    .data-source { color: #666; font-size: 0.95em; margin-top: 18px;}
   </style>
 </head>
+<body>
+  <header>
+    <h1>台灣失業人口資料儀表板</h1>
+    <nav>
+      <ul>
+        <li><a href="#dashboard">首頁</a></li>
+        <li><a href="#trend">趨勢分析</a></li>
+        <li><a href="#compare">分群比較</a></li>
+        <li><a href="#definition">指標說明</a></li>
+        <li><a href="#download">資料下載</a></li>
+      </ul>
+    </nav>
+  </header>
 <body>
   <h2>台灣最新失業與勞動統計</h2>
   <div class="card-container">

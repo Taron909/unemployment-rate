@@ -5,19 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>台灣失業人口資料儀表板</title>
   <style>
-    body { font-family: 'Noto Sans TC', Arial, sans-serif; background: #f6f8fa; margin: 0; }
-    header, footer { background: #1a237e; color: #fff; padding: 16px 0; text-align: center; }
-    nav ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; }
-    nav li { margin: 0 18px; }
-    nav a { color: #fff; text-decoration: none; font-weight: bold; }
-    main { max-width: 900px; margin: 32px auto; background: #fff; padding: 32px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);}
-    .key-metrics { display: flex; justify-content: space-around; margin-bottom: 32px; }
-    .key-metrics div { background: #e3eafc; color: #1a237e; padding: 18px 24px; border-radius: 8px; font-size: 1.2em; min-width: 140px; text-align: center;}
-    section { margin-bottom: 38px; }
-    h2 { color: #1a237e; }
-    .chart-placeholder { background: #e3eafc; border: 2px dashed #90caf9; height: 300px; display: flex; align-items: center; justify-content: center; color: #90caf9; font-size: 1.1em;}
-    .data-source { color: #666; font-size: 0.95em; margin-top: 18px;}
-  </style>
+      body { font-family: 'Noto Sans TC', Arial, sans-serif; background: #f6f8fa; margin: 0; }
+      header, footer { background: #1a237e; color: #fff; padding: 16px 0; text-align: center; }
+      table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 0.95rem;
+            background-color: white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+          }
+          th, td {
+            border: 1px solid #ccc;
+            padding: 0.7rem;
+            text-align: center;
+          }
+          th {
+            background-color: #e0f0ff;
+            color: #003366;
+            font-weight: bold;
+          }
+      nav ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; }
+      nav li { margin: 0 18px; }
+      nav a { color: #fff; text-decoration: none; font-weight: bold; }
+      main { max-width: 900px; margin: 32px auto; background: #fff; padding: 32px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);}
+      .key-metrics { display: flex; justify-content: space-around; margin-bottom: 32px; }
+      .key-metrics div { background: #e3eafc; color: #1a237e; padding: 18px 24px; border-radius: 8px; font-size: 1.2em; min-width: 140px; text-align: center;}
+      section { margin-bottom: 38px; }
+      h2 { color: #1a237e; }
+      .chart-placeholder { background: #e3eafc; border: 2px dashed #90caf9; height: 300px; display: flex; align-items: center; justify-content: center; color: #90caf9; font-size: 1.1em;}
+      .data-source { color: #666; font-size: 0.95em; margin-top: 18px;}
+    </style>
 </head>
 <body>
   <header>
@@ -34,27 +51,22 @@
   </header>
   <main>
     <section class="key-metrics">
-      <div class="card-container">
-    <div class="card">
-      <div class="card-title">失業率</div>
-      <div class="card-value" id="unemployment">-%</div>
-    </div>
-    <div class="card">
-      <div class="card-title">失業率(經季節調整後)</div>
-      <div class="card-value" id="seasonal_adjusted">-%</div>
-    </div>
-    <div class="card">
-      <div class="card-title">失業人數</div>
-      <div class="card-value" id="unemployed_thousands">-千人</div>
-    </div>
-    <div class="card">
-      <div class="card-title">就業人數</div>
-      <div class="card-value" id="employed_thousands">-千人</div>
-    </div>
-    <div class="card">
-         <div class="card-title">勞動力參與率</div>
-         <div class="card-value" id="participation_rate">-%</div>
-       </div>  
+  <table>
+    <tr>
+      <th>失業率</th>
+      <th>失業率(經季節調整後)</th>
+      <th>失業人數</th>
+      <th>就業人數</th>
+      <th>勞動力參與率</th>
+    </tr>
+    <tr>
+      <td id="unemployment">--%</td>
+      <td id="seasonal_adjusted">--%</td>
+      <td id="unemployed_thousands">--千人</td>
+      <td id="employed_thousands">--千人</td>
+      <td id="participation_rate">--%</td>
+    </tr>
+  </table>
      <script>
     fetch("data.json")
       .then(res => res.json())

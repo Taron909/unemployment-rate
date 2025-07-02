@@ -1,37 +1,82 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <title>台灣即時失業統計</title>
+  <meta charset="UTF-8">
+  <title>台灣失業統計卡片模板</title>
   <style>
-    body { font-family: "微軟正黑體", sans-serif; padding: 2rem; }
-    .stat { font-size: 1.5rem; color: #2c3e50; margin: 0.5rem 0; }
-    .value { color: #e67e22; font-weight: bold; }
+    body {
+      font-family: "微軟正黑體", sans-serif;
+      background-color: #f9fafc;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    .card-container {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .card {
+      background-color: #e9f0ff;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      width: 180px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+    .card-title {
+      font-size: 1.1rem;
+      color: #24345f;
+      margin-bottom: 0.5rem;
+    }
+    .card-value {
+      font-size: 1.3rem;
+      color: #1a237e;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <h2>台灣最新勞動統計數據</h2>
-  <div class="stat">失業率：<span id="unemployment" class="value">載入中...</span></div>
-  <div class="stat">失業率（經季節調整）：<span id="seasonal" class="value">載入中...</span></div>
-  <div class="stat">失業人數（千人）：<span id="unemployed" class="value">載入中...</span></div>
-  <div class="stat">就業人數（千人）：<span id="employed" class="value">載入中...</span></div>
-  <div class="stat">勞動力參與率（%）：<span id="participation" class="value">載入中...</span></div>
-
+  <h2>台灣最新失業與勞動統計</h2>
+  <div class="card-container">
+    <div class="card">
+      <div class="card-title">失業率</div>
+      <div class="card-value" id="unemployment">-%</div>
+    </div>
+    <div class="card">
+      <div class="card-title">失業率(經季節調整後)</div>
+      <div class="card-value" id="seasonal_adjusted">-%</div>
+    </div>
+    <div class="card">
+      <div class="card-title">失業人數</div>
+      <div class="card-value" id="unemployed_thousands">-千人</div>
+    </div>
+    <div class="card">
+      <div class="card-title">就業人數</div>
+      <div class="card-value" id="employed_thousands">-千人</div>
+    </div>
+    <div class="card">
+         <div class="card-title">勞動力參與率</div>
+         <div class="card-value" id="participation_rate">-%</div>
+       </div>    
   <script>
     fetch("data.json")
       .then(res => res.json())
       .then(data => {
         document.getElementById("unemployment").textContent = data.unemployment_rate + "%";
-        document.getElementById("seasonal").textContent = data.seasonal_adjusted + "%";
-        document.getElementById("unemployed").textContent = data.unemployed_thousands;
-        document.getElementById("employed").textContent = data.employed_thousands;
-        document.getElementById("participation").textContent = data.participation_rate + "%";
+        document.getElementById("seasonal_adjusted").textContent = data.seasonal_adjusted + "%";
+        document.getElementById("unemployed_thousands").textContent = data.unemployed_thousands + "千人";
+        document.getElementById("employed_thousands").textContent = data.employed_thousands + "千人";
+        document.getElementById("participation_rate").textContent = data.participation_rate + "%";
       })
       .catch(() => {
-        document.querySelectorAll(".value").forEach(el => el.textContent = "資料載入失敗");
+        document.querySelectorAll(".card-value").forEach(e => e.textContent = "資料錯誤");
       });
   </script>
-
   
+  </script>
 </body>
 </html>

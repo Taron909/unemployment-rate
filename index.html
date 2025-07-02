@@ -32,9 +32,9 @@
       </ul>
     </nav>
   </header>
-<body>
-  <h2>台灣最新失業與勞動統計</h2>
-  <div class="card-container">
+  <main>
+    <section class="key-metrics">
+      <div class="card-container">
     <div class="card">
       <div class="card-title">失業率</div>
       <div class="card-value" id="unemployment">-%</div>
@@ -54,8 +54,8 @@
     <div class="card">
          <div class="card-title">勞動力參與率</div>
          <div class="card-value" id="participation_rate">-%</div>
-       </div>    
-  <script>
+       </div>  
+     <script>
     fetch("data.json")
       .then(res => res.json())
       .then(data => {
@@ -69,7 +69,33 @@
         document.querySelectorAll(".card-value").forEach(e => e.textContent = "資料錯誤");
       });
   </script>
-  
-  </script>
+    </section>
+    <section id="trend">
+      <h2>失業率長期趨勢</h2>
+      <div class="chart-placeholder">（這裡可嵌入折線圖，例如Chart.js或ECharts）</div>
+    </section>
+    <section id="compare">
+      <h2>分群失業率比較</h2>
+      <div class="chart-placeholder">（這裡可嵌入互動圖表，如年齡、性別、地區比較）</div>
+    </section>
+    <section id="definition">
+      <h2>指標說明</h2>
+      <ul>
+        <li><strong>失業率：</strong>指具備工作能力且積極尋找工作但未能就業者，占勞動力人口的百分比。</li>
+        <li><strong>勞動力參與率：</strong>指就業人口與失業人口合計，占15歲以上人口的百分比。</li>
+        <li><strong>失業人口：</strong>具備工作能力且主動尋職但未獲工作者。</li>
+      </ul>
+    </section>
+    <section id="download">
+      <h2>資料下載</h2>
+      <p>原始數據表（<a href="#">CSV</a> / <a href="#">Excel</a>）｜圖表下載（<a href="#">PNG</a> / <a href="#">SVG</a>）</p>
+    </section>
+    <div class="data-source">
+      資料來源：主計總處、勞動部
+    </div>
+  </main>
+  <footer>
+    聯絡信箱：example@email.com ｜ 製作單位：資料視覺化專案組
+  </footer>
 </body>
 </html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>趨勢分析｜台灣失業率</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+TC">
+  <style>
+    /* 全站基本排版與配色設定 */
+    body {
+      font-family: 'Noto Sans TC', sans-serif; /* 套用思源黑體 */
+      background-color: #fdfcd9; /* 背景柔和鵝黃 */
+      margin: 0;
+    }
+
+    h2 {
+      color: #21409a; /* 深藍主色標題 */
+      margin-top: 40px;
+    }
+
+    canvas {
+      max-width: 100%; /* 圖表隨容器縮放 */
+      margin-bottom: 40px;
+    }
+
+        /* 標頭樣式 */
+        .header {
+          background-color: #21409a;
+          color: white;
+          padding: 20px 0;
+          text-align: center;
+          font-weight: bold;
+          font-size: 2em;
+        }
+
+    /* 導覽列樣式 */
+        nav {
+          background-color: #21409a;
+          font-size: 1em;
+          line-height: 1em;
+        }
+    
+        nav a {
+          display: inline-block;
+          line-height: 2em;
+          padding: 30px 50px;
+          color: white;
+          text-decoration: none;
+          font-weight: bold;
+        }
+    
+        nav a:hover {
+          line-height: 2em;
+          background-color: #880e4f;
+        }
+    
+        .nav-wrapper a {
+          font-size: 2em;        /* 字體大小加大 */
+          padding: 20px 40px;      /* 按鈕內距變大 */
+          min-width: 180px;        /* 最小寬度一致 */
+          text-align: center;      /* 文字置中 */
+        }
+    
+        .w3-bar .active {
+          line-height: 2em;
+          background-color: #800080 !important;
+          color: white !important;
+        }
+
+    .footer {
+      background-color: #21409a;
+      color: white;
+      text-align: center;
+      padding: 16px;
+      font-size: 0.95em;
+    }
+
+    .footer a {
+      color: white;
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* 圖表與說明區塊共用排版樣式 */
+    .chart-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+      margin-bottom: 60px;
+    }
+
+    .chart-section canvas {
+      width: 100%;
+      max-width: 700px; /* 限制圖表寬度不超過 480px */
+    }
+
+    .chart-description {
+      flex: 1;
+      min-width: 300px;
+      line-height: 1.8em;
+    }
+
+    .chart-description h3 {
+      color: #21409a;
+      font-size: 1.6em;
+      margin-bottom: 10px;
+    }
+
+    .chart-description p, .chart-description li {
+      font-size: 1.15em;
+    }
+  </style>
+</head>
+<body>
+ <!-- 頁首 -->
+  <header style="background-color: #21409a; color: white; text-align: center;">
+    <div style="padding: 20px 0; font-size: 3em; line-height: 1.4em; font-weight: bold;">
+      數據之下的現實：重新認識台灣失業率
+    </div>
+  </header>
+  <!-- 導覽列 -->
+  <nav class="w3-bar w3-indigo" style="padding:0;">
+    <div class="nav-wrapper" style="display: flex; justify-content: center; gap: 0px;">
+      <a href="index.html" class="w3-bar-item w3-button w3-hover-white">首頁</a>
+      <a href="trend.html" class="w3-bar-item w3-button w3-hover-white active">趨勢分析</a>
+      <a href="case.html" class="w3-bar-item w3-button w3-hover-white">實際案例</a>
+      <a href="policy.html" class="w3-bar-item w3-button w3-hover-white">政策建議</a>
+      <a href="source.html" class="w3-bar-item w3-button w3-hover-white">資料來源</a>
+    </div>
+  </nav>
+
+
+  <main>
+    <!-- 圖表一區塊 -->
+    <section class="chart-section">
+      <canvas id="lineChart"></canvas>
+      <div class="chart-description">
+        <h3>台灣失業總量的變動趨勢</h3>
+        <p>呈現從民國67年至今的失業人口變化，反映各時期產業變遷與經濟循環所帶來的衝擊。</p>
+        <p><b>公式：</b> 失業率 = 失業人數 ÷ 勞動力 × 100%</p>
+      </div>
+    </section>
+
+    <!-- 圖表二區塊 -->
+        <section class="chart-section">
+          <canvas id="barChart"></canvas>
+          <div class="chart-description">
+            <h3>台灣勞動市場總體結構變化</h3>
+            <p>此堆疊長條圖反映失業與就業人口總量如何隨時間改變，可推估產業吸納能力趨勢。</p>
+          </div>
+        </section>
+
+    <!-- 圖表三區塊 -->
+    <section class="chart-section">
+      <canvas id="dualLineChart"></canvas>
+      <div class="chart-description">
+        <h3>參與了，卻沒被雇用？</h3>
+        <p>雖然勞動力參與率上升，但就業占比增幅有限，反映部分人力資源無法被市場吸收。</p>
+        <ul>
+          <li>藍線：<b>勞動力參與率</b>（參與找工作的人佔整體）</li>
+          <li>橘線：<b>就業占比</b>（實際就業人口佔整體）</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    📩 聯絡我們 Taron_Lin｜<a href="#" onclick="openGmail()">blue8841269@gmail.com</a> ｜ 資料視覺化專案組
+  </footer>
+
+  <script>
+    // 開啟 Gmail 發信
+    function openGmail() {
+      const email = "blue8841269@gmail.com";
+      const subject = encodeURIComponent("詢問：失業趨勢分析");
+      const body = encodeURIComponent("您好，我想了解台灣失業率資料的更多細節...");
+      const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+      window.open(gmailURL, '_blank');
+    }
+
+    // 載入圖表資料 JSON
+    fetch("chart_data_embed.json")
+      .then(res => res.json())
+      .then(data => {
+
+        // ====== 圖表一：歷年失業人數變化 ======
+        const labelsLine = data.line_chart_data.labels.slice(1); // 移除第一欄標題
+        const datasetLine = data.line_chart_data.datasets[0];
+        
+        new Chart(document.getElementById('lineChart'), {
+          type: 'line',
+          data: {
+            labels: labelsLine,
+            datasets: [{
+              label: '失業率',
+              data: datasetLine.data.slice(1),
+              borderColor: '#114b87',       // 深藍色
+              backgroundColor: '#114b87',
+              borderWidth: 4,
+              fill: false,
+              pointRadius: 0,
+              tension: 0.1
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: {
+                min: 0,
+                max: 0.07,  // 7%
+                title: {
+                  display: true,
+                  text: '失業率'
+                },
+                ticks: {
+                  callback: value => (value * 100).toFixed(0) + '%'
+                }
+              },
+              x: {
+                title: {
+                  display: true,
+                  text: ''
+                }
+              }
+            }
+          }
+        });
+        
+       // ====== 圖表二：堆疊長條圖 ======
+       const barLabels = data.bar_chart_data.labels;
+       const barDatasets = [
+         {
+           label: '就業人數',
+           data: data.bar_chart_data.datasets[0].data,
+           backgroundColor: '#114b87', // 深藍色
+           stack: 'stack1'
+         },
+         {
+           label: '失業人數',
+           data: data.bar_chart_data.datasets[1].data,
+           backgroundColor: '#f37021', // 橘色
+           stack: 'stack1'
+         }
+       ];
+       
+       new Chart(document.getElementById('barChart'), {
+         type: 'bar',
+         data: {
+           labels: barLabels,
+           datasets: barDatasets
+         },
+         options: {
+           responsive: true,
+           plugins: { legend: { position: 'top' } },
+           scales: {
+             x: {
+               stacked: true,
+               title: {
+                 display: true,
+                 text: '年份'
+               }
+             },
+             y: {
+               stacked: true,
+               min: 6000,
+               max: 12500,
+               title: {
+                 display: true,
+                 text: '人數（千人）'
+               }
+             }
+           }
+         }
+       });
+       
+        // ====== 圖表三：雙折線圖（參與與就業） ======
+        const dualLabels = data.dual_line_chart_data.labels;
+        const dualDatasets = [
+          {
+            label: '勞動力參與率(%)',
+            data: data.dual_line_chart_data.datasets[0].data,
+            borderColor: '#114b87', // 深藍色
+            backgroundColor: '#114b87',
+            borderWidth: 4,
+            fill: false,
+            tension: 0.2,
+            pointRadius: 0
+          },
+          {
+            label: '就業人口占15歲以上民間人口(%)',
+            data: data.dual_line_chart_data.datasets[1].data,
+            borderColor: '#f37021', // 橘色
+            backgroundColor: '#f37021',
+            borderWidth: 4,
+            fill: false,
+            tension: 0.2,
+            pointRadius: 0
+          }
+        ];
+        
+        new Chart(document.getElementById('dualLineChart'), {
+          type: 'line',
+          data: {
+            labels: dualLabels,
+            datasets: dualDatasets
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { position: 'top' } },
+            scales: {
+              y: {
+                suggestedMin: 53,
+                suggestedMax: 62,
+                title: {
+                  display: true,
+                  text: '百分比 (%)'
+                },
+                ticks: {
+                  callback: value => value + '%'
+                }
+              },
+              x: {
+                title: {
+                  display: true,
+                  text: '年份'
+                }
+              }
+            }
+          }
+        });
+        
+      })
+      .catch(err => console.error("❌ 無法載入 chart_data_embed.json", err));
+  </script>
+</body>
+</html>

@@ -3,98 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>台灣失業人口資料儀表板</title>
+  <title>數據之下的現實：重新認識台灣失業率</title>
+
+  <!-- 載入 Chart.js 圖表套件 -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- W3.CSS 與字型 -->
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+TC">
+
+  <!-- 網站主題樣式 -->
   <style>
-    body {
-      font-family: 'Noto Sans TC', sans-serif;
-      background-color: #fefecf;
-    }
-    .main-hero {
+    /* 全站基本設定 */
+    html, body {
+      height: 100%;
+      margin: 0;
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      padding: 32px;
+      flex-direction: column;
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: #fdfcd9;
     }
-    .main-hero img {
+
+    /* 標頭樣式 */
+    .header {
+      background-color: #21409a;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      font-weight: bold;
+      font-size: 2em;
+    }
+
+    /* 導覽列樣式 */
+    nav {
+      background-color: #21409a;
+      font-size: 1em;
+      line-height: 1em;
+    }
+
+    nav a {
+      display: inline-block;
+      line-height: 2em;
+      padding: 30px 50px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      line-height: 2em;
+      background-color: #880e4f;
+    }
+
+    .nav-wrapper a {
+      font-size: 2em;        /* 字體大小加大 */
+      padding: 20px 40px;      /* 按鈕內距變大 */
+      min-width: 180px;        /* 最小寬度一致 */
+      text-align: center;      /* 文字置中 */
+    }
+
+    .w3-bar .active {
+      line-height: 2em;
+      background-color: #800080 !important;
+      color: white !important;
+    }
+
+    /* 主區內容排版 */
+    main {
+      flex: 1;
+    }
+
+    .main-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      padding: 50px;
+    }
+
+    .main-content img {
       max-width: 100%;
       height: auto;
-      width: 500px;
-      margin-right: 32px;
+      width: 400px;
+      border: 2px solid #444;
     }
-    .main-hero .info {
-      max-width: 480px;
-      color: #222;
+
+    .info-panel {
+      font-size: 3em;
+      line-height: 2em;
     }
-    .info h2 {
-      font-size: 28px;
-      margin-bottom: 24px;
+
+    .w3-row-padding {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
     }
-    .info p {
-      font-size: 18px;
-      margin: 12px 0;
+
+    /* 頁尾樣式 */
+    .footer {
+      background-color: #21409a;
+      color: white;
+      text-align: center;
+      padding: 17px;
+      font-size: 1em;
     }
-    .info p span {
-      font-weight: bold;
-      color: #1a237e;
+
+    .footer a {
+      color: white;
+      text-decoration: underline;
     }
   </style>
 </head>
-<body class="w3-light-grey">
-  <header class="w3-container w3-indigo w3-padding-16 w3-center">
-    <h2><b>數據之下的現實．重新認識台灣失業率</b></h2>
-  </header>
-<nav class="w3-bar w3-indigo w3-padding">
-  <div class="w3-bar w3-center" style="display: flex; justify-content: center;">
-    <a href="index.html" class="w3-bar-item w3-button w3-hover-white" style="margin: 0 24px;">首頁</a>
-    <a href="trend.html" class="w3-bar-item w3-button w3-hover-white" style="margin: 0 24px;">趨勢分析</a>
-    <a href="compare.html" class="w3-bar-item w3-button w3-hover-white" style="margin: 0 24px;">分群比較</a>
-    <a href="definition.html" class="w3-bar-item w3-button w3-hover-white" style="margin: 0 24px;">指標說明</a>
-    <a href="download.html" class="w3-bar-item w3-button w3-hover-white" style="margin: 0 24px;">資料來源</a>
-  </div>
-</nav>
-  <div class="main-hero">
-    <img src="Unemployment.jpg" alt="Unemployment">
-    <div class="info">
-      <h2>台灣失業人口即時資訊</h2>
-      <p>失業率：<span id="unemployment">--%</span></p>
-      <p>失業率(經季節調整後)：<span id="seasonal_adjusted">--%</span></p>
-      <p>失業人數：<span id="unemployed_thousands">-- 千人</span></p>
-      <p>就業人數：<span id="employed_thousands">-- 千人</span></p>
-      <p>勞動力參與率：<span id="participation_rate">--%</span></p>
+<body>
+
+  <!-- 頁首 -->
+  <header style="background-color: #21409a; color: white; text-align: center;">
+    <div style="padding: 20px 0; font-size: 3em; line-height: 1.4em; font-weight: bold;">
+      數據之下的現實：重新認識台灣失業率
     </div>
-  </div>
+  </header>
 
-<footer class="w3-container w3-indigo w3-padding-16 w3-center">
-  📩 寄信給我們
-     <a href="#" onclick="openGmail()" class="w3-text-white">blue8841269@gmail.com</a>
-    林宸緯_blue8841269@gmail.com
-  </a>
-  
-  ｜ 製作單位：資料視覺化專案組
-</footer>
-<script>
-  if (navigator.registerProtocolHandler) {
-    navigator.registerProtocolHandler(
-      "mailto",
-      "https://mail.google.com/mail/?extsrc=mailto&url=%s",
-      "使用 Gmail 寄送郵件"
-    );
-  }
-</script>
-<script>
-  function openGmail() {
-    const email = "blue8841269@gmail.com"; // <- 替換成你的信箱
-    const subject = encodeURIComponent("主旨預設文字"); // 可空白
-    const body = encodeURIComponent("您好，這裡是我要說的內容..."); // 可空白
-    const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
-    window.open(gmailURL, '_blank');
-  }
-</script>
+  <!-- 導覽列 -->
+  <nav class="w3-bar w3-indigo" style="padding:0;">
+    <div class="nav-wrapper" style="display: flex; justify-content: center; gap: 0px;">
+      <a href="index.html" class="w3-bar-item w3-button w3-hover-white active">首頁</a>
+      <a href="trend.html" class="w3-bar-item w3-button w3-hover-white">趨勢分析</a>
+      <a href="case.html" class="w3-bar-item w3-button w3-hover-white">實際案例</a>
+      <a href="policy.html" class="w3-bar-item w3-button w3-hover-white">政策建議</a>
+      <a href="source.html" class="w3-bar-item w3-button w3-hover-white">資料來源</a>
+    </div>
+  </nav>
 
+  <!-- 主內容區 -->
+  <main class="w3-content w3-padding-32" style="max-width:1400px;">
+    <div class="w3-row w3-margin-top" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 60px;">
+      
+      <!-- 圖片 -->
+      <div style="flex: 2;">
+        <img src="Unemployment.jpg" alt="Unemployment" class="w3-image w3-card" style="width:85%; height:auto;">
+      </div>
+
+      <!-- 即時資訊 -->
+      <div style="flex: 1; font-size: 1.5em; line-height: 2.7em;" class="w3-padding-large">
+        <h1 class="w3-text-indigo" style="font-size: 1.5em;">台灣失業人口即時資訊</h1>
+        <p>失業率：<span id="unemployment">-%</span></p>
+        <p>失業率(經季節調整後)：<span id="seasonal_adjusted">-%</span></p>
+        <p>失業人數：<span id="unemployed_thousands">--</span> 千人</p>
+        <p>就業人數：<span id="employed_thousands">--</span> 千人</p>
+        <p>勞動力參與率：<span id="participation_rate">-%</span></p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 頁腳 -->
+  <footer class="footer">
+    📩 寄信給我 Taron_Lin 
+    <a href="#" onclick="openGmail()">blue8841269@gmail.com</a> ｜ 製作單位：資料視覺化專案組
+  </footer>
+
+  <!-- Gmail 開啟功能 -->
+  <script>
+    function openGmail() {
+      const email = "blue8841269@gmail.com";
+      const subject = encodeURIComponent("主旨預設文字");
+      const body = encodeURIComponent("您好，這裡是我要說的內容...");
+      const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+      window.open(gmailURL, '_blank');
+    }
+  </script>
+
+  <!-- 載入 JSON 即時資料 -->
   <script>
     fetch("data.json")
       .then(res => res.json())
@@ -106,8 +186,9 @@
         document.getElementById("participation_rate").textContent = data.participation_rate + "%";
       })
       .catch(() => {
-        document.querySelectorAll(".info span").forEach(e => e.textContent = "資料錯誤");
+        document.querySelectorAll("span").forEach(e => e.textContent = "資料錯誤");
       });
   </script>
+
 </body>
 </html>

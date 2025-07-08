@@ -5,123 +5,124 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>數據之下的現實：重新認識台灣失業率</title>
 
-  <!-- 引入 W3CSS 與 Noto Sans TC 字體 -->
+  <!-- 🔧 引入外部樣式：W3.CSS 與 Google Fonts -->
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" />
 
   <style>
-    /* 全站基本設定 */
+    /* ===== 全站基本樣式設定 ===== */
     html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      background-color: #fdfcd9;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      margin: 0;                         /* 移除預設外距 */
+      padding: 0;                        /* 移除預設內距 */
+      font-family: 'Noto Sans TC', sans-serif; /* 使用台灣常見中文字型 */
+      background-color: #fdfcd9;         /* 米黃色背景 (#fdfcd9) */
+      display: flex;                     /* 使用 flex 排版結構 */
+      flex-direction: column;            /* 垂直排列元素 */
+      min-height: 100vh;                 /* 至少要填滿整個視窗高度 */
     }
 
-    /* 頁首樣式 */
+    /* ===== 頁首樣式 ===== */
     .header {
-      background-color: #21409a;
-      color: white;
-      text-align: center;
-      padding: 30px 0;
-      font-size: 2em;
-      font-weight: bold;
+      background-color: #21409a;         /* 深藍背景 (#21409a) */
+      color: white;                      /* 白色文字 */
+      text-align: center;                /* 置中對齊文字 */
+      padding: 30px 0;                   /* 上下內距 */
+      font-size: 2em;                    /* 字體大小 */
+      font-weight: bold;                 /* 粗體字 */
     }
 
-    /* 導覽列區塊樣式 */
+    /* ===== 導覽列樣式 ===== */
     nav {
-      background-color: #21409a;
-      font-size: 1em; /* 導覽列基本文字大小 */
-      line-height: 1em;
+      background-color: #21409a;         /* 深藍背景與 header 一致 */
+      font-size: 1em;                    /* 基本字體大小 */
+      line-height: 1em;                  /* 行距設定 */
+      display: flex;                     /* 橫向排列項目 */
+      justify-content: center;           /* 導覽列置中 */
+      flex-wrap: wrap;                   /* 小螢幕時允許自動換行 */
     }
 
     nav a {
-      display: inline-block;
-      line-height: 2em;
-      padding: 30px 50px; /* 導覽按鈕的內距 */
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
+      display: inline-block;             /* 顯示為區塊元素 */
+      line-height: 2em;                  /* 每列高度 */
+      padding: 30px 50px;                /* 四周留白調整 */
+      color: white;                      /* 文字為白色 */
+      text-decoration: none;             /* 移除底線 */
+      font-weight: bold;                 /* 加粗字體 */
     }
 
     nav a:hover {
-      background-color: #880e4f;
+      background-color: #880e4f;         /* 滑鼠懸停時為酒紅色背景 */
     }
 
     .nav-wrapper a {
-      font-size: 2em;         /* 導覽列文字加大 */
-      padding: 20px 40px;     /* 導覽按鈕內距加大 */
-      min-width: 180px;       /* 每個按鈕最小寬度 */
-      text-align: center;     /* 文字置中 */
+      font-size: 2em;                    /* 導覽列文字變大 */
+      padding: 20px 40px;                /* 內距加大，增強按鈕感 */
+      min-width: 180px;                  /* 保持寬度一致，避免壓縮 */
+      text-align: center;                /* 文字水平置中 */
     }
 
     .w3-bar .active {
-      background-color: #800080 !important; /* 啟用中的頁面背景 */
+      background-color: #800080 !important; /* 當前頁面顯示為紫色 (#800080) */
       color: white !important;
     }
 
-    /* 主圖容器樣式 */
+    /* ===== 主圖與引言樣式 ===== */
     .top-image-container {
-      position: relative;
-      margin-top: 0px;
+      position: relative;                /* 為了讓 quote 絕對定位 */
+      margin-top: 0px;                   /* 預留空間防止重疊 */
     }
 
-    /* 主圖設定 */
     .top-image {
-      width: 100%;
-      max-width: 1000px; /* 主圖最大寬度 */
-      margin: 0 auto;
+      width: 100%;                       /* 寬度佔滿容器 */
+      max-width: 1000px;                 /* 最大寬度為 1000px */
+      margin: 0 auto;                    /* 水平置中 */
       display: block;
-      object-fit: cover;
+      object-fit: cover;                 /* 裁切方式保持比例 */
     }
 
-    /* 主圖上的標語文字 */
     .quote {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%); /* 讓文字水平置中 */
+      position: absolute;                /* 絕對定位在圖片上 */
+      bottom: 40px;                      /* 離底部 40px */
+      left: 50%;                         /* 左邊中心點 */
+      transform: translateX(-50%);       /* 水平置中技巧 */
       color: white;
       font-size: 1.5em;
-      text-shadow: 1px 1px 5px black;
+      text-shadow: 1px 1px 5px black;     /* 文字陰影增加對比 */
     }
 
-    /* 介紹段落排版區塊 */
+    /* ===== 段落介紹樣式 ===== */
     .section {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 50px;
-      gap: 30px;
+      flex-wrap: wrap;                   /* 換行支援 */
+      justify-content: center;           /* 區塊水平置中 */
+      padding: 50px;                     /* 區塊留白 */
+      gap: 30px;                         /* 區塊間距 */
     }
 
     .section-text {
       flex: 1.2;
-      max-width: 1000px;
+      max-width: 1000px;                 /* 限制文字最大寬度 */
       margin: 0 auto;
     }
 
     .section-text h2 {
       font-weight: bold;
-      font-size: 1.8em;  /* 可調整為 2~3em 加大標題 */
-      margin-left: 10%;
-      max-width: 700px;
+      font-size: 1.8em;
+      margin-left: 10%;                  /* 左邊留白 */
+      max-width: 700px;                  /* 文字不超出容器 */
     }
 
     .section-text p {
       margin-left: 10%;
       max-width: 700px;
-      font-size: 1.2em; /* 段落文字大小調整這裡 */
+      font-size: 1.2em;
       line-height: 1.8em;
     }
 
-    /* 即時資訊區塊樣式 */
+    /* ===== 即時資訊區塊樣式 ===== */
     .data-section {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;                 /* 即使手機也維持橫向排列 */
       justify-content: center;
       align-items: center;
       padding: 40px;
@@ -129,22 +130,22 @@
     }
 
     .data-title {
-      font-size: 2em; /* 即時資訊標題大小 */
+      font-size: 2em;                    /* 標題字體大小 */
       font-weight: bold;
     }
 
     .data-list {
-      font-size: 1.4em; /* 即時資訊文字大小 */
-      line-height: 2em; /* 行距調整 */
+      font-size: 1.4em;                  /* 列表字體大小 */
+      line-height: 2em;                  /* 行距 */
     }
 
     .icon-image {
-      width: 500px; /* 圖片寬度設定 */
+      width: 500px;                      /* 資訊區圖片寬度 */
     }
 
-    /* 頁尾樣式 */
+    /* ===== 頁尾樣式 ===== */
     .footer {
-      background-color: #21409a;
+      background-color: #21409a;         /* 深藍色背景 */
       color: white;
       text-align: center;
       padding: 16px;
@@ -156,30 +157,14 @@
       text-decoration: underline;
     }
 
-    /* 手機與平板裝置的響應式設計 */
+    /* ===== 響應式手機樣式調整 ===== */
     @media screen and (max-width: 768px) {
       nav {
-        flex-direction: column; /* 導覽列改為垂直 */
-      }
-
-      .section, .data-section {
-        flex-direction: column;
-        padding: 20px;
-      }
-
-      .data-title {
-        font-size: 1.5em;
-        text-align: center;
-      }
-
-      .icon-image {
-        width: 100%;
-        max-width: 280px;
-        margin: 0 auto;
+        flex-direction: column;         /* 導覽列垂直排列 */
       }
 
       .quote {
-        font-size: 1em;
+        font-size: 1em;                  /* 手機上縮小文字 */
         left: 50% !important;
         transform: translateX(-50%);
         bottom: 10px;
@@ -188,54 +173,81 @@
       }
 
       .section-text h2, .section-text p {
-        margin-left: 0;
+        margin-left: 0;                 /* 移除 margin-left */
         max-width: 100%;
-        text-align: center;
+        text-align: center;             /* 手機文字置中 */
+      }
+
+      .data-section {
+        flex-wrap: nowrap;              /* 保持橫排不換行 */
+        gap: 20px;
+      }
+
+      .icon-image {
+        width: 150px;                   /* 縮小圖片 */
+      }
+
+      .data-title {
+        font-size: 1.3em;               /* 手機縮小標題 */
+      }
+
+      .data-list {
+        font-size: 1em;                 /* 手機縮小內容 */
       }
     }
   </style>
 </head>
+
 <body>
+  <!-- 🔷 頁首標題區塊：標示網站主題 -->
+  <header class="header">數據之下的現實：重新認識台灣失業率</header>
 
-  <!-- 頁首標題區塊 -->
-  <header class="header">
-    數據之下的現實：重新認識台灣失業率
-  </header>
-
-  <!-- 導覽列 -->
-  <nav class="w3-bar w3-indigo" style="padding:0;">
+  <!-- 🔷 導覽列區塊：提供頁面間的導覽功能 -->
+  <nav class="w3-bar w3-indigo">
     <div class="nav-wrapper" style="display: flex; justify-content: center; gap: 0px;">
+      <!-- 導覽列按鈕：首頁，點擊會導向 index.html -->
       <a href="index.html" class="w3-bar-item w3-button w3-hover-white active">首頁</a>
+      <!-- 導覽列按鈕：趨勢分析，點擊會導向 trend.html -->
       <a href="trend.html" class="w3-bar-item w3-button w3-hover-white">趨勢分析</a>
+      <!-- 導覽列按鈕：實際案例，點擊會導向 case.html -->
       <a href="case.html" class="w3-bar-item w3-button w3-hover-white">實際案例</a>
+      <!-- 導覽列按鈕：政策建議，點擊會導向 policy.html -->
       <a href="policy.html" class="w3-bar-item w3-button w3-hover-white">政策建議</a>
+      <!-- 導覽列按鈕：資料來源，點擊會導向 source.html -->
       <a href="source.html" class="w3-bar-item w3-button w3-hover-white">資料來源</a>
     </div>
   </nav>
 
-  <!-- 主圖與引言文字 -->
+  <!-- 🔷 主圖與引言區塊 -->
   <div class="top-image-container">
+    <!-- 主視覺圖片（Unemployment.jpg） -->
     <img src="Unemployment.jpg" alt="主圖" class="top-image" />
+    <!-- 引言文字：置於圖片下方中央位置 -->
     <div class="quote">他不是懶惰，而是還在等待機會的人</div>
   </div>
 
-  <!-- 介紹段落區塊 -->
+  <!-- 🔷 介紹段落區塊 -->
   <section class="section">
     <div class="section-text">
-      <h2 style="font-size: 3.2em; font-weight: bold;">台灣的失業率聽起來不高</h2>
-      <p style="max-width: 1500px; margin: 0 auto;font-size: 2em;">
-        背後藏著多少沒人看見的努力與焦慮？我們用圖表、數據與故事，<br>
-        帶你重新理解什麼叫做「沒工作的人」，也希望讓更多人知道，<br>
+      <!-- 小標題文字 -->
+      <h2>台灣的失業率聽起來不高</h2>
+      <!-- 介紹段落說明文字，換行使用 <br> 增加可讀性 -->
+      <p>
+        背後藏著多少沒人看見的努力與焦慮？我們用圖表、數據與故事，<br />
+        帶你重新理解什麼叫做「沒工作的人」，也希望讓更多人知道，<br />
         數字背後，是一個個正在努力生存的人。
       </p>
     </div>
   </section>
 
-  <!-- 即時資訊圖文區塊 -->
+  <!-- 🔷 即時資訊區塊（圖片＋數據） -->
   <section class="data-section">
+    <!-- 資訊對應圖片（如插圖 Unemployment._3.jpg） -->
     <img src="Unemployment._3.jpg" alt="Unemployment._3" class="icon-image">
     <div>
+      <!-- 標題文字：即時資訊區塊的主標題 -->
       <div class="data-title">台灣失業人口即時資訊</div>
+      <!-- 數據列表：使用 span 裝載之後 fetch() 載入的即時資料 -->
       <div class="data-list">
         <p>🙇‍♂️ 失業率：<span id="unemployment">--%</span></p>
         <p>🕐 失業率（經季節調整後）：<span id="seasonal_adjusted">--%</span></p>
@@ -246,22 +258,22 @@
     </div>
   </section>
 
-  <!-- 頁尾資訊區塊 -->
+  <!-- 🔷 頁尾區塊：聯絡資訊與版權聲明 -->
   <footer class="footer">
     📩 寄信給我 林宸緯 <a href="#" onclick="openGmail()">blue8841269@gmail.com</a> ｜ 製作單位：資料視覺化專案組
   </footer>
 
-  <!-- Gmail 自動開啟函式 -->
+  <!-- 🔷 開啟 Gmail 撰寫視窗的功能函式 -->
   <script>
     function openGmail() {
       const email = "blue8841269@gmail.com";
       const subject = encodeURIComponent("主旨預設文字");
-      const body = encodeURIComponent("您好，這裡是我要說的內容...");
+      const body = encodeURIComponent("您好，我想了解有關台灣失業率資料的更多細節...");
       const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
       window.open(gmailURL, '_blank');
     }
 
-    // 讀取 JSON 並更新資料
+    // 🔷 載入 data.json 中的即時資料，並插入到各個 span 中
     fetch("data.json")
       .then(res => res.json())
       .then(data => {
@@ -272,6 +284,7 @@
         document.getElementById("participation_rate").textContent = data.participation_rate + "%";
       })
       .catch(() => {
+        // 若載入失敗，則所有數值欄位顯示「資料錯誤」
         document.querySelectorAll("span").forEach(e => e.textContent = "資料錯誤");
       });
   </script>

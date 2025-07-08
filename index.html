@@ -1,103 +1,145 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>數據之下的現實：重新認識台灣失業率</title>
 
-  <!-- 載入 Chart.js 圖表套件 -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- 引入 W3CSS 與 Noto Sans TC 字體 -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" />
 
-  <!-- W3.CSS 與字型 -->
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+TC">
-
-  <!-- 網站主題樣式 -->
   <style>
     /* 全站基本設定 */
     html, body {
-      height: 100%;
       margin: 0;
-      display: flex;
-      flex-direction: column;
+      padding: 0;
       font-family: 'Noto Sans TC', sans-serif;
       background-color: #fdfcd9;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
-    /* 標頭樣式 */
+    /* 頁首樣式 */
     .header {
       background-color: #21409a;
       color: white;
-      padding: 20px 0;
       text-align: center;
-      font-weight: bold;
+      padding: 30px 0;
       font-size: 2em;
+      font-weight: bold;
     }
 
-    /* 導覽列樣式 */
+    /* 導覽列區塊樣式 */
     nav {
       background-color: #21409a;
-      font-size: 1em;
+      font-size: 1em; /* 導覽列基本文字大小 */
       line-height: 1em;
     }
 
     nav a {
       display: inline-block;
       line-height: 2em;
-      padding: 30px 50px;
+      padding: 30px 50px; /* 導覽按鈕的內距 */
       color: white;
       text-decoration: none;
       font-weight: bold;
     }
 
     nav a:hover {
-      line-height: 2em;
       background-color: #880e4f;
     }
 
     .nav-wrapper a {
-      font-size: 2em;        /* 字體大小加大 */
-      padding: 20px 40px;      /* 按鈕內距變大 */
-      min-width: 180px;        /* 最小寬度一致 */
-      text-align: center;      /* 文字置中 */
+      font-size: 2em;         /* 導覽列文字加大 */
+      padding: 20px 40px;     /* 導覽按鈕內距加大 */
+      min-width: 180px;       /* 每個按鈕最小寬度 */
+      text-align: center;     /* 文字置中 */
     }
 
     .w3-bar .active {
-      line-height: 2em;
-      background-color: #800080 !important;
+      background-color: #800080 !important; /* 啟用中的頁面背景 */
       color: white !important;
     }
 
-    /* 主區內容排版 */
-    main {
-      flex: 1;
+    /* 主圖容器樣式 */
+    .top-image-container {
+      position: relative;
+      margin-top: 0px;
     }
 
-    .main-content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 40px;
-      padding: 50px;
+    /* 主圖設定 */
+    .top-image {
+      width: 100%;
+      max-width: 1000px; /* 主圖最大寬度 */
+      margin: 0 auto;
+      display: block;
+      object-fit: cover;
     }
 
-    .main-content img {
-      max-width: 100%;
-      height: auto;
-      width: 400px;
-      border: 2px solid #444;
+    /* 主圖上的標語文字 */
+    .quote {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%); /* 讓文字水平置中 */
+      color: white;
+      font-size: 1.5em;
+      text-shadow: 1px 1px 5px black;
     }
 
-    .info-panel {
-      font-size: 3em;
-      line-height: 2em;
-    }
-
-    .w3-row-padding {
+    /* 介紹段落排版區塊 */
+    .section {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      align-items: flex-start;
+      padding: 50px;
+      gap: 30px;
+    }
+
+    .section-text {
+      flex: 1.2;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-text h2 {
+      font-weight: bold;
+      font-size: 1.8em;  /* 可調整為 2~3em 加大標題 */
+      margin-left: 10%;
+      max-width: 700px;
+    }
+
+    .section-text p {
+      margin-left: 10%;
+      max-width: 700px;
+      font-size: 1.2em; /* 段落文字大小調整這裡 */
+      line-height: 1.8em;
+    }
+
+    /* 即時資訊區塊樣式 */
+    .data-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      gap: 40px;
+    }
+
+    .data-title {
+      font-size: 2em; /* 即時資訊標題大小 */
+      font-weight: bold;
+    }
+
+    .data-list {
+      font-size: 1.4em; /* 即時資訊文字大小 */
+      line-height: 2em; /* 行距調整 */
+    }
+
+    .icon-image {
+      width: 500px; /* 圖片寬度設定 */
     }
 
     /* 頁尾樣式 */
@@ -105,23 +147,59 @@
       background-color: #21409a;
       color: white;
       text-align: center;
-      padding: 17px;
-      font-size: 1em;
+      padding: 16px;
+      font-size: 0.95em;
     }
 
     .footer a {
       color: white;
       text-decoration: underline;
     }
+
+    /* 手機與平板裝置的響應式設計 */
+    @media screen and (max-width: 768px) {
+      nav {
+        flex-direction: column; /* 導覽列改為垂直 */
+      }
+
+      .section, .data-section {
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .data-title {
+        font-size: 1.5em;
+        text-align: center;
+      }
+
+      .icon-image {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+      }
+
+      .quote {
+        font-size: 1em;
+        left: 50% !important;
+        transform: translateX(-50%);
+        bottom: 10px;
+        text-align: center;
+        width: 90%;
+      }
+
+      .section-text h2, .section-text p {
+        margin-left: 0;
+        max-width: 100%;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- 頁首 -->
-  <header style="background-color: #21409a; color: white; text-align: center;">
-    <div style="padding: 20px 0; font-size: 3em; line-height: 1.4em; font-weight: bold;">
-      數據之下的現實：重新認識台灣失業率
-    </div>
+  <!-- 頁首標題區塊 -->
+  <header class="header">
+    數據之下的現實：重新認識台灣失業率
   </header>
 
   <!-- 導覽列 -->
@@ -135,35 +213,45 @@
     </div>
   </nav>
 
-  <!-- 主內容區 -->
-  <main class="w3-content w3-padding-32" style="max-width:1400px;">
-    <div class="w3-row w3-margin-top" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 60px;">
-      
-      <!-- 圖片 -->
-      <div style="flex: 2;">
-        <img src="Unemployment.jpg" alt="Unemployment" class="w3-image w3-card" style="width:85%; height:auto;">
-      </div>
+  <!-- 主圖與引言文字 -->
+  <div class="top-image-container">
+    <img src="Unemployment.jpg" alt="主圖" class="top-image" />
+    <div class="quote">他不是懶惰，而是還在等待機會的人</div>
+  </div>
 
-      <!-- 即時資訊 -->
-      <div style="flex: 1; font-size: 1.5em; line-height: 2.7em;" class="w3-padding-large">
-        <h1 class="w3-text-indigo" style="font-size: 1.5em;">台灣失業人口即時資訊</h1>
-        <p>失業率：<span id="unemployment">-%</span></p>
-        <p>失業率(經季節調整後)：<span id="seasonal_adjusted">-%</span></p>
-        <p>失業人數：<span id="unemployed_thousands">--</span> 千人</p>
-        <p>就業人數：<span id="employed_thousands">--</span> 千人</p>
-        <p>勞動力參與率：<span id="participation_rate">-%</span></p>
-      </div>
-
+  <!-- 介紹段落區塊 -->
+  <section class="section">
+    <div class="section-text">
+      <h2 style="font-size: 3.2em; font-weight: bold;">台灣的失業率聽起來不高</h2>
+      <p style="max-width: 1500px; margin: 0 auto;font-size: 2em;">
+        背後藏著多少沒人看見的努力與焦慮？我們用圖表、數據與故事，<br>
+        帶你重新理解什麼叫做「沒工作的人」，也希望讓更多人知道，<br>
+        數字背後，是一個個正在努力生存的人。
+      </p>
     </div>
-  </main>
+  </section>
 
-  <!-- 頁腳 -->
+  <!-- 即時資訊圖文區塊 -->
+  <section class="data-section">
+    <img src="Unemployment._3.jpg" alt="Unemployment._3" class="icon-image">
+    <div>
+      <div class="data-title">台灣失業人口即時資訊</div>
+      <div class="data-list">
+        <p>🙇‍♂️ 失業率：<span id="unemployment">--%</span></p>
+        <p>🕐 失業率（經季節調整後）：<span id="seasonal_adjusted">--%</span></p>
+        <p>🧾 失業人數：<span id="unemployed_thousands">--</span> 千人</p>
+        <p>💼 就業人數：<span id="employed_thousands">--</span> 千人</p>
+        <p>📈 勞動力參與率：<span id="participation_rate">--%</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 頁尾資訊區塊 -->
   <footer class="footer">
-    📩 寄信給我 Taron_Lin 
-    <a href="#" onclick="openGmail()">blue8841269@gmail.com</a> ｜ 製作單位：資料視覺化專案組
+    📩 寄信給我 林宸緯 <a href="#" onclick="openGmail()">blue8841269@gmail.com</a> ｜ 製作單位：資料視覺化專案組
   </footer>
 
-  <!-- Gmail 開啟功能 -->
+  <!-- Gmail 自動開啟函式 -->
   <script>
     function openGmail() {
       const email = "blue8841269@gmail.com";
@@ -172,10 +260,8 @@
       const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
       window.open(gmailURL, '_blank');
     }
-  </script>
 
-  <!-- 載入 JSON 即時資料 -->
-  <script>
+    // 讀取 JSON 並更新資料
     fetch("data.json")
       .then(res => res.json())
       .then(data => {
@@ -189,6 +275,5 @@
         document.querySelectorAll("span").forEach(e => e.textContent = "資料錯誤");
       });
   </script>
-
 </body>
 </html>

@@ -9,193 +9,197 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" />
 
-  <style>
-    /* ===== 全站基本樣式設定 ===== */
-    html, body {
-      margin: 0;                         /* 移除預設外距 */
-      padding: 0;                        /* 移除預設內距 */
-      font-family: 'Noto Sans TC', sans-serif; /* 使用台灣常見中文字型 */
-      background-color: #fdfcd9;         /* 米黃色背景 (#fdfcd9) */
-      display: flex;                     /* 使用 flex 排版結構 */
-      flex-direction: column;            /* 垂直排列元素 */
-      min-height: 100vh;                 /* 至少要填滿整個視窗高度 */
-    }
-
-    /* ===== 頁首樣式 ===== */
-    .header {
-      background-color: #21409a;         /* 深藍背景 (#21409a) */
-      color: white;                      /* 白色文字 */
-      text-align: center;                /* 置中對齊文字 */
-      padding: 30px 0;                   /* 上下內距 */
-      font-size: 2em;                    /* 字體大小 */
-      font-weight: bold;                 /* 粗體字 */
-    }
-
-    /* ===== 導覽列樣式 ===== */
-    nav {
-      background-color: #21409a;         /* 深藍背景與 header 一致 */
-      font-size: 1em;                    /* 基本字體大小 */
-      line-height: 1em;                  /* 行距設定 */
-      display: flex;                     /* 橫向排列項目 */
-      justify-content: center;           /* 導覽列置中 */
-      flex-wrap: wrap;                   /* 小螢幕時允許自動換行 */
-    }
-
-    nav a {
-      display: inline-block;             /* 顯示為區塊元素 */
-      line-height: 2em;                  /* 每列高度 */
-      padding: 30px 50px;                /* 四周留白調整 */
-      color: white;                      /* 文字為白色 */
-      text-decoration: none;             /* 移除底線 */
-      font-weight: bold;                 /* 加粗字體 */
-    }
-
-    nav a:hover {
-      background-color: #880e4f;         /* 滑鼠懸停時為酒紅色背景 */
-    }
-
-    .nav-wrapper a {
-      font-size: 2em;                    /* 導覽列文字變大 */
-      padding: 20px 40px;                /* 內距加大，增強按鈕感 */
-      min-width: 180px;                  /* 保持寬度一致，避免壓縮 */
-      text-align: center;                /* 文字水平置中 */
-    }
-
-    .w3-bar .active {
-      background-color: #800080 !important; /* 當前頁面顯示為紫色 (#800080) */
-      color: white !important;
-    }
-
-    /* ===== 主圖與引言樣式 ===== */
-    .top-image-container {
-      position: relative;                /* 為了讓 quote 絕對定位 */
-      margin-top: 0px;                   /* 預留空間防止重疊 */
-    }
-
-    .top-image {
-      width: 100%;                       /* 寬度佔滿容器 */
-      max-width: 1000px;                 /* 最大寬度為 1000px */
-      margin: 0 auto;                    /* 水平置中 */
-      display: block;
-      object-fit: cover;                 /* 裁切方式保持比例 */
-    }
-
-    .quote {
-      position: absolute;                /* 絕對定位在圖片上 */
-      bottom: 40px;                      /* 離底部 40px */
-      left: 50%;                         /* 左邊中心點 */
-      transform: translateX(-50%);       /* 水平置中技巧 */
-      color: white;
-      font-size: 1.5em;
-      text-shadow: 1px 1px 5px black;     /* 文字陰影增加對比 */
-    }
-
-    /* ===== 段落介紹樣式 ===== */
-    .section {
-      display: flex;
-      flex-wrap: wrap;                   /* 換行支援 */
-      justify-content: center;           /* 區塊水平置中 */
-      padding: 50px;                     /* 區塊留白 */
-      gap: 30px;                         /* 區塊間距 */
-    }
-
-    .section-text {
-      flex: 1.2;
-      max-width: 1000px;                 /* 限制文字最大寬度 */
-      margin: 0 auto;
-    }
-
-    .section-text h2 {
-      font-weight: bold;
-      font-size: 1.8em;
-      margin-left: 10%;                  /* 左邊留白 */
-      max-width: 700px;                  /* 文字不超出容器 */
-    }
-
-    .section-text p {
-      margin-left: 10%;
-      max-width: 700px;
-      font-size: 1.2em;
-      line-height: 1.8em;
-    }
-
-    /* ===== 即時資訊區塊樣式 ===== */
-    .data-section {
-      display: flex;
-      flex-wrap: nowrap;                 /* 即使手機也維持橫向排列 */
-      justify-content: center;
-      align-items: center;
-      padding: 40px;
-      gap: 40px;
-    }
-
-    .data-title {
-      font-size: 2em;                    /* 標題字體大小 */
-      font-weight: bold;
-    }
-
-    .data-list {
-      font-size: 1.4em;                  /* 列表字體大小 */
-      line-height: 2em;                  /* 行距 */
-    }
-
-    .icon-image {
-      width: 500px;                      /* 資訊區圖片寬度 */
-    }
-
-    /* ===== 頁尾樣式 ===== */
-    .footer {
-      background-color: #21409a;         /* 深藍色背景 */
-      color: white;
-      text-align: center;
-      padding: 16px;
-      font-size: 0.95em;
-    }
-
-    .footer a {
-      color: white;
-      text-decoration: underline;
-    }
-
-    /* ===== 響應式手機樣式調整 ===== */
-    @media screen and (max-width: 768px) {
+   <style>
+      /* === 全站共用樣式設定 === */
+      body {
+        font-family: 'Noto Sans TC', sans-serif; /* 全站統一使用思源黑體 */
+        background-color: #fdfcd9;               /* 主背景色：柔和鵝黃色 */
+        margin: 0;                               /* 移除預設邊距 */
+      }
+  
+      h2 {
+        color: #21409a; /* 標題字體顏色：深藍色 */
+        margin-top: 40px;
+      }
+  
+      canvas {
+        max-width: 100%; /* 圖表隨容器寬度縮放 */
+        margin-bottom: 40px;
+      }
+  
+      /* === 頁首標題樣式設定 === */
+      .header {
+        background-color: #21409a; /* 深藍背景色 */
+        color: white;              /* 白色字體 */
+        text-align: center;        /* 標題置中 */
+        padding: 30px 0;           /* 上下內距 */
+        font-size: 2em;            /* 字體大小為2倍 */
+        font-weight: bold;         /* 加粗字體 */
+      }
+  
+      /* === 導覽列樣式設定 === */
       nav {
-        flex-direction: column;         /* 導覽列垂直排列 */
+        background-color: #21409a; /* 導覽列背景為深藍色 */
+        display: flex;
+        flex-wrap: wrap;           /* 導覽列換行以避免寬度超出 */
+        justify-content: center;
       }
-
-      .quote {
-        font-size: 1em;                  /* 手機上縮小文字 */
-        left: 50% !important;
-        transform: translateX(-50%);
-        bottom: 10px;
+  
+      nav a {
+        display: inline-block;
+        line-height: 2em;
+        padding: 30px 50px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        white-space: nowrap;       /* 防止文字換行 */
+        font-size: clamp(0.9em, 2.5vw, 1.3em); /* 自動縮放字體大小：視窗越小字越小 */
+      }
+  
+      nav a:hover {
+        background-color: #880e4f; /* 滑鼠滑過為酒紅色 */
+      }
+  
+      .w3-bar .active {
+        background-color: #800080 !important; /* 紫色為當前頁面標記 */
+        color: white !important;
+      }
+  
+      /* === 頁尾樣式設定 === */
+      .footer {
+        background-color: #21409a; /* 深藍背景 */
+        color: white;
         text-align: center;
-        width: 90%;
+        padding: 16px;
+        font-size: 0.95em;
       }
-
-      .section-text h2, .section-text p {
-        margin-left: 0;                 /* 移除 margin-left */
-        max-width: 100%;
-        text-align: center;             /* 手機文字置中 */
+  
+      .footer a {
+        color: white;
+        text-decoration: underline;
       }
-
-      .data-section {
-        flex-wrap: nowrap;              /* 保持橫排不換行 */
-        gap: 20px;
+  
+      /* === 主體內容容器設定 === */
+      main {
+        max-width: 1200px;      /* 內文最大寬度 */
+        margin: 40px auto;      /* 垂直外距＋置中 */
+        padding: 0 20px;
       }
-
-      .icon-image {
-        width: 150px;                   /* 縮小圖片 */
-      }
-
-      .data-title {
-        font-size: 1.3em;               /* 手機縮小標題 */
-      }
-
-      .data-list {
-        font-size: 1em;                 /* 手機縮小內容 */
-      }
-    }
-  </style>
+  
+     /* ===== 主圖與引言樣式 ===== */
+         .top-image-container {
+           position: relative;                /* 為了讓 quote 絕對定位 */
+           margin-top: 0px;                   /* 預留空間防止重疊 */
+         }
+     
+         .top-image {
+           width: 100%;                       /* 寬度佔滿容器 */
+           max-width: 1000px;                 /* 最大寬度為 1000px */
+           margin: 0 auto;                    /* 水平置中 */
+           display: block;
+           object-fit: cover;                 /* 裁切方式保持比例 */
+         }
+     
+         .quote {
+           position: absolute;                /* 絕對定位在圖片上 */
+           bottom: 40px;                      /* 離底部 40px */
+           left: 50%;                         /* 左邊中心點 */
+           transform: translateX(-50%);       /* 水平置中技巧 */
+           color: white;
+           font-size: 1.5em;
+           text-shadow: 1px 1px 5px black;     /* 文字陰影增加對比 */
+         }/* ===== 段落介紹樣式 ===== */
+             .section {
+               display: flex;
+               flex-wrap: wrap;                   /* 換行支援 */
+               justify-content: center;           /* 區塊水平置中 */
+               padding: 50px;                     /* 區塊留白 */
+               gap: 30px;                         /* 區塊間距 */
+             }
+         
+             .section-text {
+               flex: 1.2;
+               max-width: 1000px;                 /* 限制文字最大寬度 */
+               margin: 0 auto;
+             }
+         
+             .section-text h2 {
+               font-weight: bold;
+               font-size: 1.8em;
+               margin-left: 10%;                  /* 左邊留白 */
+               max-width: 700px;                  /* 文字不超出容器 */
+             }
+         
+             .section-text p {
+               margin-left: 10%;
+               max-width: 700px;
+               font-size: 1.2em;
+               line-height: 1.8em;
+             }
+         
+             /* ===== 即時資訊區塊樣式 ===== */
+             .data-section {
+               display: flex;
+               flex-wrap: nowrap;                 /* 即使手機也維持橫向排列 */
+               justify-content: center;
+               align-items: center;
+               padding: 40px;
+               gap: 40px;
+             }
+         
+             .data-title {
+               font-size: 2em;                    /* 標題字體大小 */
+               font-weight: bold;
+             }
+         
+             .data-list {
+               font-size: 1em;                  /* 列表字體大小 */
+               line-height: 1.7em;                  /* 行距 */
+             }
+         
+             .icon-image {
+               width: 350px;                      /* 資訊區圖片寬度 */
+             }
+  
+      /* ===== 響應式手機樣式調整 ===== */
+          @media screen and (max-width: 768px) {
+            nav {
+              flex-direction: column;         /* 導覽列垂直排列 */
+            }
+      
+            .quote {
+              font-size: 1em;                  /* 手機上縮小文字 */
+              left: 50% !important;
+              transform: translateX(-50%);
+              bottom: 10px;
+              text-align: center;
+              width: 90%;
+            }
+      
+            .section-text h2, .section-text p {
+              margin-left: 0;                 /* 移除 margin-left */
+              max-width: 100%;
+              text-align: center;             /* 手機文字置中 */
+            }
+      
+            .data-section {
+              flex-wrap: nowrap;              /* 保持橫排不換行 */
+              gap: 20px;
+            }
+      
+            .icon-image {
+              width: 150px;                   /* 縮小圖片 */
+            }
+      
+            .data-title {
+              font-size: 1.3em;               /* 手機縮小標題 */
+            }
+      
+            .data-list {
+              font-size: 1em;                 /* 手機縮小內容 */
+            }
+          }
+    </style>
 </head>
 
 <body>
@@ -251,8 +255,8 @@
       <div class="data-list">
         <p>🙇‍♂️ 失業率：<span id="unemployment">--%</span></p>
         <p>🕐 失業率（經季節調整後）：<span id="seasonal_adjusted">--%</span></p>
-        <p>🧾 失業人數：<span id="unemployed_thousands">--</span> 千人</p>
-        <p>💼 就業人數：<span id="employed_thousands">--</span> 千人</p>
+        <p>🧾 失業人數：<span id="unemployed_thousands">--</span> </p>
+        <p>💼 就業人數：<span id="employed_thousands">--</span> </p>
         <p>📈 勞動力參與率：<span id="participation_rate">--%</span></p>
       </div>
     </div>
